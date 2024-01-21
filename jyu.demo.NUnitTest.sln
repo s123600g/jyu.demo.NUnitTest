@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{0B2F43C1-ADF8-4DE0-8BFA-151F9D537A07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{146E08EF-980D-4FB9-B50C-59532C4DB89E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloBank.Web.Api", "Src\HelloBank.Web.Api\HelloBank.Web.Api.csproj", "{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{BC9AAF52-361F-452F-9625-86E873C772FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1} = {0B2F43C1-ADF8-4DE0-8BFA-151F9D537A07}
+	EndGlobalSection
+EndGlobal
