@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{BC9AAF52-361
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloBankDbLib", "Src\Lib\HelloBankDbLib\HelloBankDbLib.csproj", "{34644170-FB64-421B-8542-715C0FCFD154}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionLib", "Src\Lib\ExceptionLib\ExceptionLib.csproj", "{C789FD43-6239-4A3E-85F2-ABBBFABCDB4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,9 +32,14 @@ Global
 		{34644170-FB64-421B-8542-715C0FCFD154}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34644170-FB64-421B-8542-715C0FCFD154}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34644170-FB64-421B-8542-715C0FCFD154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C789FD43-6239-4A3E-85F2-ABBBFABCDB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C789FD43-6239-4A3E-85F2-ABBBFABCDB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C789FD43-6239-4A3E-85F2-ABBBFABCDB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C789FD43-6239-4A3E-85F2-ABBBFABCDB4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{52B49AB8-194F-4C7B-B64C-CC272BE7B5B1} = {0B2F43C1-ADF8-4DE0-8BFA-151F9D537A07}
 		{34644170-FB64-421B-8542-715C0FCFD154} = {BC9AAF52-361F-452F-9625-86E873C772FE}
+		{C789FD43-6239-4A3E-85F2-ABBBFABCDB4E} = {BC9AAF52-361F-452F-9625-86E873C772FE}
 	EndGlobalSection
 EndGlobal

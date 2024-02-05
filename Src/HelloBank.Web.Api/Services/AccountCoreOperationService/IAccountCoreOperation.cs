@@ -5,35 +5,24 @@ namespace HelloBank.Web.Api.Services.AccountCoreOperationService;
 public interface IAccountCoreOperation
 {
     /// <summary>
-    /// 查詢用戶資訊
+    /// 查詢帳戶基本資訊
     /// </summary>
     /// <param name="argUserIdentityNo">用戶身份證號碼</param>
-    /// <returns></returns>
-    Task<CustInfo?> QueryUserInfo(
-        string argUserIdentityNo
-    );
-
-    /// <summary>
-    /// 查詢帳戶餘額
-    /// </summary>
-    /// <param name="argAccountNo">帳戶帳號</param>
     /// <returns>
-    ///<see cref="decimal"/>
+    ///<see cref="AccountBasicInfo"/>
     /// </returns>
-    Task<decimal?> QueryAccountBalances(
-       string argAccountNo
+    Task<AccountBasicInfo?> QueryAccountBasicInfo(
+        string argUserIdentityNo
     );
 
     /// <summary>
     /// 新增帳戶餘額
     /// </summary>
-    /// <param name="argUserIdentityNo">用戶身份證號碼</param>
     /// <param name="argAccountNo">帳戶帳號</param>
     /// <param name="argAmount">金額</param>
     /// <returns></returns>
     Task AddAccountBalances(
-        string argUserIdentityNo
-        , string argAccountNo
+        string argAccountNo
         , decimal argAmount
     );
 
@@ -41,11 +30,9 @@ public interface IAccountCoreOperation
     /// 提取帳戶餘額
     /// </summary>
     /// <param name="argAccountNo">帳戶帳號</param>
-    /// <param name="argUserIdentityNo">用戶身份證號碼</param>
     /// <param name="argAmount">金額</param>
     Task WithdrawalAccountBalances(
-        string argUserIdentityNo
-        , string argAccountNo
+        string argAccountNo
         , decimal argAmount
     );
 }

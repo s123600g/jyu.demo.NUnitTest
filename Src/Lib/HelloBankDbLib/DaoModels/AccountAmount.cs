@@ -7,5 +7,5 @@ public partial class AccountAmount
 {
     public string AccountNo { get; set; } = null!;
 
-    public int Amount { get; set; }
+    public decimal Amount { get; set; }
 }

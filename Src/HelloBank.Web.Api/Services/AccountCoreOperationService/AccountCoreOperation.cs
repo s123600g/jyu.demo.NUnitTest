@@ -1,4 +1,5 @@
-﻿using HelloBank.Web.Api.Models.Services.AccountCoreOperationService;
+﻿using ExceptionLib.Exceptions;
+using HelloBank.Web.Api.Models.Services.AccountCoreOperationService;
 using HelloBankDbLib.Dao;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,53 +16,90 @@ public class AccountCoreOperation : IAccountCoreOperation
         _db = argHelloBankDbContext ?? throw new ArgumentNullException(nameof(argHelloBankDbContext));
     }
 
-    public async Task<CustInfo?> QueryUserInfo(
+    public async Task<AccountBasicInfo?> QueryAccountBasicInfo(
         string argUserIdentityNo
     )
     {
-        var queryData = await _db.CustInfos.AsNoTracking().Where(t =>
+        AccountBasicInfo? result = null;
+
+        var queryMappingData = await _db.CustAccountMappings.AsNoTracking().Where(t =>
             t.CustId == argUserIdentityNo
-        ).FirstOrDefaultAsync();
+        ).ToListAsync();
 
-        CustInfo? result = null;
-
-        if (queryData != null)
+        if (
+            queryMappingData.Any()
+        )
         {
-            result = new CustInfo
+            var queryUserData = await _db.CustInfos.AsNoTracking().Where(t =>
+                t.CustId == argUserIdentityNo
+            ).FirstOrDefaultAsync();
+
+            List<string> accountNos = queryMappingData.Select(t =>
+                t.AccountNo
+            ).ToList();
+
+            var queryAccountData = await _db.AccountAmounts.AsNoTracking().Where(t =>
+                accountNos.Contains(t.AccountNo)
+            ).ToListAsync();
+
+            result = new AccountBasicInfo
             {
-                UserIdentityNo = queryData.CustId, UserName = queryData.Name
+                UserIdentityNo = queryUserData?.CustId,
+                UserName = queryUserData?.Name,
+                Accounts = queryAccountData.Select(t => new AccountDetail
+                {
+                    AccountNo = t.AccountNo,
+                    AccountBalances = t.Amount
+                }).ToList()
             };
         }
 
         return result;
     }
 
-    public async Task<decimal?> QueryAccountBalances(
+    public async Task AddAccountBalances(
         string argAccountNo
+        , decimal argAmount
     )
     {
-        var queryData = await _db.AccountAmounts.AsNoTracking().Where(t =>
+        var dataEntity = await _db.AccountAmounts.Where(t =>
             t.AccountNo == argAccountNo
         ).FirstOrDefaultAsync();
 
-        return queryData?.Amount;
+        if (
+            dataEntity != null
+        )
+        {
+            dataEntity.Amount += argAmount;
+
+            await _db.SaveChangesAsync();
+        }
+        else
+        {
+            throw new DataNotFoundException();
+        }
     }
 
-    public Task AddAccountBalances(
-        string argUserIdentityNo
-        , string argAccountNo
+    public async Task WithdrawalAccountBalances(
+        string argAccountNo
         , decimal argAmount
     )
     {
-        throw new NotImplementedException();
-    }
+        var dataEntity = await _db.AccountAmounts.Where(t =>
+            t.AccountNo == argAccountNo
+        ).FirstOrDefaultAsync();
 
-    public Task WithdrawalAccountBalances(
-        string argUserIdentityNo
-        , string argAccountNo
-        , decimal argAmount
-    )
-    {
-        throw new NotImplementedException();
+        if (
+            dataEntity != null
+        )
+        {
+            dataEntity.Amount -= argAmount;
+
+            await _db.SaveChangesAsync();
+        }
+        else
+        {
+            throw new DataNotFoundException();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 
-namespace HelloBank.Web.Api.Area.AccountOperation.Models.MyAccountOperation;
+namespace HelloBank.Web.Api.Area.AccountOperation.Models.MyAccountOperation.Rq;
 
 public class QueryAccountBalancesRq
 {

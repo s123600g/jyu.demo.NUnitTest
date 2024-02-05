@@ -18,9 +18,11 @@
     <ItemGroup>
       <Folder Include="Area\AccountOperation\Controllers\" />
       <Folder Include="Controllers\" />
+      <Folder Include="Services\VerifyAccoutAndUserService\" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Lib\ExceptionLib\ExceptionLib.csproj" />
       <ProjectReference Include="..\Lib\HelloBankDbLib\HelloBankDbLib.csproj" />
     </ItemGroup>
 
