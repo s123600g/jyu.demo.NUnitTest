@@ -18,7 +18,6 @@
     <ItemGroup>
       <Folder Include="Area\AccountOperation\Controllers\" />
       <Folder Include="Controllers\" />
-      <Folder Include="Services\VerifyAccoutAndUserService\" />
     </ItemGroup>
 
     <ItemGroup>
