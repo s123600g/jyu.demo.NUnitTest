@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test ~/Test/HelloBank.Web.Api.Test/HelloBank.Web.Api.Test.csproj  --verbosity normal
+      run: dotnet test ./Test/HelloBank.Web.Api.Test/HelloBank.Web.Api.Test.csproj  --verbosity normal
