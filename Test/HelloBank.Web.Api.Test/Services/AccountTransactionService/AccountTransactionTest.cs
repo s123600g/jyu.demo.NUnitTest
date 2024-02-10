@@ -68,22 +68,7 @@ public class AccountTransactionTest
     {
         #region Arrange
 
-        AccountBasicInfo mockQueryDbData = new AccountBasicInfo
-        {
-            Accounts = new List<AccountDetail>
-            {
-                new AccountDetail
-                {
-                    AccountNo = "00011122233445",
-                    AccountBalances = 1000
-                },
-                new AccountDetail
-                {
-                    AccountNo = "00022122523998",
-                    AccountBalances = 5000
-                }
-            }
-        };
+        AccountBasicInfo mockQueryDbData = GenMockQueryDbData();
 
         _accountCoreOperation.QueryAccountBasicInfo(
             Arg.Any<string>()
@@ -101,7 +86,7 @@ public class AccountTransactionTest
         );
 
         #endregion
-        
+
         #region Assert
 
         Assert.ThrowsAsync<AccountNotFoundException>(
@@ -110,4 +95,172 @@ public class AccountTransactionTest
 
         #endregion
     }
+
+    /// <summary>
+    /// 測試案例 For AddAccountDeposit: 資料庫查無用戶資料是否拋出DataNotFoundException
+    /// </summary>
+    [Test]
+    public void CheckAddAccountDepositNotFoundUserTest()
+    {
+        #region Arrange
+
+        _accountCoreOperation.QueryAccountBasicInfo(
+            Arg.Any<string>()
+        ).Returns(
+            Task.FromResult<AccountBasicInfo?>(null)
+        );
+
+        #endregion
+
+        #region Act
+
+        var act = _accountTransaction.AddAccountDeposit(
+            argUserIdentityNo: ""
+            , argAccountNo: ""
+            , argAmount: 1000
+        );
+
+        #endregion
+
+        #region Assert
+
+        Assert.ThrowsAsync<DataNotFoundException>(
+            async () => { await act; }
+        );
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 測試案例 For AddAccountDeposit: 查無用戶底下對應帳戶資料是否拋出AccountNotFoundException
+    /// </summary>
+    [Test]
+    public void CheckAddAccountDepositNotFoundAccountTest()
+    {
+        #region Arrange
+
+        AccountBasicInfo mockQueryDbData = GenMockQueryDbData();
+
+        _accountCoreOperation.QueryAccountBasicInfo(
+            Arg.Any<string>()
+        ).Returns(
+            Task.FromResult<AccountBasicInfo?>(mockQueryDbData)
+        );
+
+        #endregion
+
+        #region Act
+
+        var act = _accountTransaction.AddAccountDeposit(
+            argUserIdentityNo: "A123456789"
+            , argAccountNo: "12345678900000"
+            , argAmount: 1000
+        );
+
+        #endregion
+
+        #region Assert
+
+        Assert.ThrowsAsync<AccountNotFoundException>(
+            async () => { await act; }
+        );
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 測試案例 For WithdrawalAccountDeposit: 資料庫查無用戶資料是否拋出DataNotFoundException
+    /// </summary>
+    [Test]
+    public void CheckWithdrawalAccountDepositNotFoundUserTest()
+    {
+        #region Arrange
+
+        _accountCoreOperation.QueryAccountBasicInfo(
+            Arg.Any<string>()
+        ).Returns(
+            Task.FromResult<AccountBasicInfo?>(null)
+        );
+
+        #endregion
+
+        #region Act
+
+        var act = _accountTransaction.WithdrawalAccountDeposit(
+            argUserIdentityNo: ""
+            , argAccountNo: ""
+            , argAmount: 1000
+        );
+
+        #endregion
+
+        #region Assert
+
+        Assert.ThrowsAsync<DataNotFoundException>(
+            async () => { await act; }
+        );
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 測試案例 For WithdrawalAccountDeposit: 查無用戶底下對應帳戶資料是否拋出AccountNotFoundException
+    /// </summary>
+    [Test]
+    public void CheckWithdrawalAccountDepositNotFoundAccountTest()
+    {
+        #region Arrange
+
+        AccountBasicInfo mockQueryDbData = GenMockQueryDbData();
+
+        _accountCoreOperation.QueryAccountBasicInfo(
+            Arg.Any<string>()
+        ).Returns(
+            Task.FromResult<AccountBasicInfo?>(mockQueryDbData)
+        );
+
+        #endregion
+
+        #region Act
+
+        var act = _accountTransaction.WithdrawalAccountDeposit(
+            argUserIdentityNo: "A123456789"
+            , argAccountNo: "12345678900000"
+            , argAmount: 1000
+        );
+
+        #endregion
+
+        #region Assert
+
+        Assert.ThrowsAsync<AccountNotFoundException>(
+            async () => { await act; }
+        );
+
+        #endregion
+    }
+
+    #region 內部處理邏輯
+
+    private AccountBasicInfo GenMockQueryDbData()
+    {
+        return new AccountBasicInfo
+        {
+            Accounts = new List<AccountDetail>
+            {
+                new AccountDetail
+                {
+                    AccountNo = "00011122233445",
+                    AccountBalances = 1000
+                },
+                new AccountDetail
+                {
+                    AccountNo = "00022122523998",
+                    AccountBalances = 5000
+                }
+            }
+        };
+    }
+
+    #endregion
 }
