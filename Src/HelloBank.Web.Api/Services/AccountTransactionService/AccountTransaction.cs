@@ -93,7 +93,18 @@ public class AccountTransaction : IAccountTransaction
         }
 
         #endregion
-        
+
+        #region 檢核3
+
+        if (
+            argAmount < 1000
+        )
+        {
+            throw new InvalidAmountException();
+        }
+
+        #endregion
+
         await _accountCoreOperation.AddAccountBalances(
             argAccountNo: argAccountNo,
             argAmount: argAmount
@@ -136,7 +147,20 @@ public class AccountTransaction : IAccountTransaction
 
         #endregion
 
-        #region 檢核3 && 執行
+        #region 檢核3
+
+        if (
+            argAmount < 1000
+            ||
+            (argAmount % 1000) != 0
+        )
+        {
+            throw new InvalidAmountException();
+        }
+
+        #endregion
+
+        #region 檢核4 && 執行
 
         if (
             accountEntity.AccountBalances.HasValue
