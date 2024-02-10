@@ -59,4 +59,55 @@ public class AccountTransactionTest
 
         #endregion
     }
+
+    /// <summary>
+    /// 測試案例 For GetAccountBalances: 查無用戶底下對應帳戶資料是否拋出AccountNotFoundException
+    /// </summary>
+    [Test]
+    public void CheckGetAccountBalancesNotFoundAccountTest()
+    {
+        #region Arrange
+
+        AccountBasicInfo mockQueryDbData = new AccountBasicInfo
+        {
+            Accounts = new List<AccountDetail>
+            {
+                new AccountDetail
+                {
+                    AccountNo = "00011122233445",
+                    AccountBalances = 1000
+                },
+                new AccountDetail
+                {
+                    AccountNo = "00022122523998",
+                    AccountBalances = 5000
+                }
+            }
+        };
+
+        _accountCoreOperation.QueryAccountBasicInfo(
+            Arg.Any<string>()
+        ).Returns(
+            Task.FromResult<AccountBasicInfo?>(mockQueryDbData)
+        );
+
+        #endregion
+
+        #region Act
+
+        var act = _accountTransaction.GetAccountBalances(
+            argUserIdentityNo: "A123456789"
+            , argAccountNo: "12345678900000"
+        );
+
+        #endregion
+        
+        #region Assert
+
+        Assert.ThrowsAsync<AccountNotFoundException>(
+            async () => { await act; }
+        );
+
+        #endregion
+    }
 }
