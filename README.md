@@ -27,3 +27,4 @@ Web API範例專案初始設定
 | Db      | HelloBank.sqlite       | DB範例檔-SQLite       |
 | Test    | HelloBank.Web.Api.Test | 測試範例專案          |
 | Test    | HelloWorld.Test        | 測試範例專案          |
+
