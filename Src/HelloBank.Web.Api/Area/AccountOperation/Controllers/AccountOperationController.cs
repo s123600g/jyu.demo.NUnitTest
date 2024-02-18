@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace HelloBank.Web.Api.Area.AccountOperation.Controllers
 {
     [Area("Account")]
-    public class AccountOperation : BaseController
+    public class AccountOperationController : BaseController
     {
         private readonly IAccountTransaction _accountTransaction;
 
-        public AccountOperation(IAccountTransaction argAccountTransaction)
+        public AccountOperationController(IAccountTransaction argAccountTransaction)
         {
             _accountTransaction = argAccountTransaction ??
                                   throw new ArgumentNullException(nameof(argAccountTransaction));
