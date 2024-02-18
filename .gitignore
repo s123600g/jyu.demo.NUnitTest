@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 Src/HelloBank.Web.Api/Db/*.sqlite
+.vscode/*
