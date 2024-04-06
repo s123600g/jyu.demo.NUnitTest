@@ -1,4 +1,4 @@
-jjyu.demo.NUnitTest
+jyu.demo.NUnitTest
 -------------------
 
 ### 專案環境：
